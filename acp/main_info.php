@@ -13,16 +13,16 @@ class main_info
 {
 	public function module()
 	{
-		return array(
+		return [
 			'filename'	=> '\dmzx\newsletter\acp\main_module',
 			'title'		=> 'ACP_DMZX_NEWSLETTER_TITLE',
-			'modes'		=> array(
-				'newsletter'	=> array(
+			'modes'		=> [
+				'newsletter'	=> [
 					'title'	=> 'ACP_DMZX_NEWSLETTER_TITLE',
 					'auth'	=> 'ext_dmzx/newsletter && acl_a_board',
-					'cat'	=> array('ACP_GENERAL_TASKS')
-				),
-			),
-		);
+					'cat'	=> ['ACP_GENERAL_TASKS']
+				],
+			],
+		];
 	}
 }
