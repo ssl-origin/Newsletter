@@ -13,13 +13,13 @@ class acp_controller
 {
 	/** @var \phpbb\config\config */
 	protected $config;
-	
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
-	
+
 	/** @var \phpbb\language\language */
 	protected $language;
-	
+
 	/** @var \phpbb\log\log */
 	protected $log;
 
@@ -46,7 +46,7 @@ class acp_controller
 
 	/** @var string */
 	protected $phpbb_admin_path;
-	
+
 	/** @var string */
 	protected $tables;
 
