@@ -68,19 +68,19 @@ class acp_controller
 	 * {@inheritdoc
 	 */
 	public function __construct(
-		config				$config,
+		config $config,
 		driver_interface $db,
-		language			$language,
-		log					$log,
-		request			$request,
-		template			$template,
-		user						$user,
-		helper				$group_helper,
-		manager			$ext_manager,
-											$php_ext,
-											$root_path,
-											$adm_relative_path,
-		array							 $tables
+		language $language,
+		log $log,
+		request $request,
+		template $template,
+		user $user,
+		helper $group_helper,
+		manager $ext_manager,
+        $php_ext,
+        $root_path,
+        $adm_relative_path,
+		array $tables
 	)
 	{
 		$this->config = $config;
@@ -119,21 +119,27 @@ class acp_controller
 		$priority = $this->request->variable('mail_priority_flag', MAIL_NORMAL_PRIORITY);
 		$var_replace = $this->template_vars();
 
-		if ($this->config['email_enable']) {
-			if ($this->submit) {
-				if (!check_form_key($this->form_key)) {
+		if ($this->config['email_enable'])
+		{
+			if ($this->submit)
+			{
+				if (!check_form_key($this->form_key))
+				{
 					$error[] = $this->language->lang('FORM_INVALID');
 				}
 
-				if (empty($title)) {
+				if (empty($title))
+				{
 					$error[] = $this->language->lang('NO_NEWSLETTER_TITLE');
 				}
 
-				if (empty($message)) {
+				if (empty($message))
+				{
 					$error[] = $this->language->lang('NO_NEWSLETTER_MESSAGE');
 				}
 
-				if (!empty($author)) {
+				if (!empty($author))
+				{
 					$sql = 'SELECT user_id
 						FROM ' . $this->tables['users'] . "
 						WHERE username_clean = '" . $this->db->sql_escape(utf8_clean_string($author)) . "'";
@@ -141,13 +147,16 @@ class acp_controller
 					$author_id = $this->db->sql_fetchfield('user_id');
 					$this->db->sql_freeresult($result);
 
-					if (!$author_id) {
+					if (!$author_id)
+					{
 						$error[] = $this->language->lang('NO_NEWSLETTER_AUTHOR');
 					}
 				}
 
-				if (!count($error)) {
-					if (!empty($usernames)) {
+				if (!count($error))
+				{
+					if (!empty($usernames))
+					{
 						$sql_ary = [
 							'SELECT' => 'u.user_id, u.user_ip, u.user_email, u.username, u.username_clean, u.user_lang, u.user_jabber, u.user_notify_type',
 							'FROM' => [
@@ -157,8 +166,11 @@ class acp_controller
 								AND user_allow_massemail = 1',
 							'ORDER_BY' => 'user_lang, user_notify_type',
 						];
-					} else {
-						if ($group_id) {
+					}
+					else
+					{
+						if ($group_id)
+						{
 							$sql_ary = [
 								'SELECT' => 'u.user_id, u.user_ip, u.user_email, u.username, u.username_clean, u.user_lang, u.user_jabber, u.user_notify_type',
 								'FROM' => [
@@ -172,7 +184,9 @@ class acp_controller
 									AND u.user_type IN (' . USER_NORMAL . ', ' . USER_FOUNDER . ')',
 								'ORDER_BY' => 'u.user_lang, u.user_notify_type',
 							];
-						} else {
+						}
+						else
+						{
 							$sql_ary = [
 								'SELECT' => 'u.user_id, u.user_ip, u.username, u.username_clean, u.user_email, u.user_jabber, u.user_lang, u.user_notify_type',
 								'FROM' => [
@@ -189,7 +203,8 @@ class acp_controller
 					$result = $this->db->sql_query($sql);
 					$row = $this->db->sql_fetchrow($result);
 
-					if (!$row) {
+					if (!$row)
+					{
 						$this->db->sql_freeresult($result);
 						trigger_error($this->language->lang('SOME_USERNAMES_NOT_FOUND', implode(', ', $usernames)) . adm_back_link($this->u_action), E_USER_WARNING);
 					}
@@ -199,7 +214,8 @@ class acp_controller
 					do {
 						if (($row['user_notify_type'] == NOTIFY_EMAIL && $row['user_email']) ||
 							($row['user_notify_type'] == NOTIFY_IM && $row['user_jabber']) ||
-							($row['user_notify_type'] == NOTIFY_BOTH && ($row['user_email'] || $row['user_jabber']))) {
+							($row['user_notify_type'] == NOTIFY_BOTH && ($row['user_email'] || $row['user_jabber'])))
+						{
 							$email_list[$j][$i]['lang'] = $row['user_lang'];
 							$email_list[$j][$i]['method'] = $row['user_notify_type'];
 							$email_list[$j][$i]['email'] = $row['user_email'];
@@ -212,29 +228,35 @@ class acp_controller
 
 					$this->db->sql_freeresult($result);
 
-					for ($i = 0, $size = count($email_list); $i < $size; $i++) {
+					for ($i = 0, $size = count($email_list); $i < $size; $i++)
+					{
 						$used_lang = $email_list[$i][0]['lang'];
 						$used_method = $email_list[$i][0]['method'];
 						$email_count = $email_list[$i];
 
 						$trigger_message = $this->language->lang('NEWSLETTER_SEND', count($email_count));
 
-						if (!empty($usernames) && count($usernames) !== count($email_count)) {
+						if (!empty($usernames) && count($usernames) !== count($email_count))
+						{
 							$found_usernames = $email_list[$i]['name'];
-							foreach ($usernames as $username) {
-								if (!$found_usernames) {
+							foreach ($usernames as $username)
+							{
+								if (!$found_usernames)
+								{
 									$not_found_users[] = $username;
 								}
 							}
 							$trigger_message .= $this->language->lang('SOME_USERNAMES_NOT_FOUND', implode(', ', $not_found_users));
 						}
 
-						for ($j = 0, $list_size = count($email_list[$i]); $j < $list_size; $j++) {
+						for ($j = 0, $list_size = count($email_list[$i]); $j < $list_size; $j++)
+						{
 							$email_row = $email_list[$i][$j];
 							$this->email_member($email_row['user_id'], $message, $title, $author, $url, $priority);
 						}
 
-						$userlist = array_map(function ($entry) {
+						$userlist = array_map(function ($entry)
+                        {
 							return $entry['name'];
 
 						}, $email_list[$i]);
@@ -248,11 +270,13 @@ class acp_controller
 				}
 			}
 
-			if ($this->preview) {
+			if ($this->preview)
+			{
 				$this->template->assign_var('PREVIEW', htmlspecialchars_decode($message));
 			}
 
-			if ($this->send_test_email) {
+			if ($this->send_test_email)
+			{
 				$this->email_member($this->user->data['user_id'], $message, $this->language->lang('NEWSLETTER_TEST_EMAIL_SENT'), $author, $url, $priority);
 				trigger_error($this->language->lang('NEWSLETTER_TEST_EMAIL_SENT') . adm_back_link($this->u_action));
 			}
@@ -262,7 +286,8 @@ class acp_controller
 			FROM ' . $this->tables['groups'] . '
 			WHERE ' . $this->db->sql_in_set('group_name', ['BOTS', 'GUESTS'], true);
 		$result = $this->db->sql_query($sql);
-		while ($row = $this->db->sql_fetchrow($result)) {
+		while ($row = $this->db->sql_fetchrow($result))
+        {
 			$this->template->assign_block_vars('groups', [
 				'ID' => $row['group_id'],
 				'NAME' => $this->group_helper->get_name($row['group_name']),
@@ -274,7 +299,8 @@ class acp_controller
 		$s_priority_options .= '<option value="' . MAIL_NORMAL_PRIORITY . '" selected="selected">' . $this->language->lang('MAIL_NORMAL_PRIORITY') . '</option>';
 		$s_priority_options .= '<option value="' . MAIL_HIGH_PRIORITY . '">' . $this->language->lang('MAIL_HIGH_PRIORITY') . '</option>';
 
-		foreach ($var_replace as $var) {
+		foreach ($var_replace as $var)
+		{
 			$this->template->assign_block_vars('var_variables', [
 				'VAR' => $var,
 				'INFO' => $this->language->lang('NEWSLETTER_' . str_replace(['{', '}'], '', $var)),
@@ -323,13 +349,15 @@ class acp_controller
 		}
 		$this->db->sql_freeresult($result);
 
-		if (!class_exists('messenger')) {
+		if (!class_exists('messenger'))
+		{
 			include($this->root_path . 'includes/functions_messenger.' . $this->php_ext);
 		}
 
 		$messenger = new messenger(false);
 
-		foreach ($msg_list as $key => $value) {
+		foreach ($msg_list as $key => $value)
+		{
 			$var_replace = $this->template_vars();
 			$str_replace = [$this->config['sitename'], generate_board_url(), $value['name'], $value['email'], $url, $author];
 			$message = str_replace($var_replace, $str_replace, $message);
