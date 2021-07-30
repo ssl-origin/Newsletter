@@ -20,7 +20,7 @@ class m1_acp_module extends migration
 			WHERE module_class = 'acp'
 				AND module_langname = 'ACP_DMZX_NEWSLETTER_TITLE'";
 		$result = $this->db->sql_query($sql);
-		$module_id = (int)$this->db->sql_fetchfield('module_id');
+		$module_id = (int) $this->db->sql_fetchfield('module_id');
 		$this->db->sql_freeresult($result);
 
 		return $module_id;
