@@ -1,20 +1,18 @@
 <?php
 /**
-*
-* @package phpBB Extension - Newsletter
-* @copyright (c) 2020 dmzx - https://www.dmzx-web.net
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*
-*/
+ *
+ * @package phpBB Extension - Newsletter
+ * @copyright (c) 2020 dmzx - https://www.dmzx-web.net
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
 
-if (!defined('IN_PHPBB'))
-{
-	exit;
+if (!defined('IN_PHPBB')) {
+    exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
-	$lang = [];
+if (empty($lang) || !is_array($lang)) {
+    $lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,7 +31,7 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 
 $lang = array_merge($lang, [
-	'ACP_DMZX_NEWSLETTER_TITLE'			=> 'Email newsletter',
-	// Log message
-	'LOG_NEWSLETTER_EMAIL'				=> '<strong>Sent email to user(s)</strong><br />» %s',
+    'ACP_DMZX_NEWSLETTER_TITLE' => 'Email newsletter',
+    // Log message
+    'LOG_NEWSLETTER_EMAIL' => '<strong>Sent email to user(s)</strong><br />» %s',
 ]);
