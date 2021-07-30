@@ -1,6 +1,6 @@
 # Newsletter Extension
 
-[![Build Status](https://travis-ci.org/dmzx/Newsletter.svg?branch=master)](https://travis-ci.org/dmzx/Newsletter)
+[![Build Status](https://github.com/dmzx/Newsletter/workflows/Tests/badge.svg)](https://github.com/phpbb-extensions/dmzx/Newsletter)
 
 ## Install
 1. Download the latest release.
