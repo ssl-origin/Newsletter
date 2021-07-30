@@ -42,44 +42,35 @@
             </dd>
         </dl>
         <dl>
-            <dt><label for="usernames">{{ lang('SEND_TO_USERS') ~ lang('COLON') }}</label><br/><span>{{ lang('SEND_TO_USERS_EXPLAIN') }}</span>
-            </dt>
+            <dt><label for="usernames">{{ lang('SEND_TO_USERS') ~ lang('COLON') }}</label><br><span>{{ lang('SEND_TO_USERS_EXPLAIN') }}</span></dt>
             <dd><textarea name="usernames" id="usernames" rows="5" cols="40">{{ USERNAMES }}</textarea></dd>
-            <dd>[ <a href="{{ U_FIND_USERNAME }}" onclick="find_username(this.href); return false;">{{
-                lang('FIND_USERNAME') }}</a> ]
-            </dd>
+            <dd>[ <a href="{{ U_FIND_USERNAME }}" onclick="find_username(this.href); return false;">{{ lang('FIND_USERNAME') }}</a> ]</dd>
         </dl>
         <dl>
             <dt><label for="title">{{ lang('TITLE') ~ lang('COLON') }}</label></dt>
             <dd><input size="40" name="title" type="text" id="title" value="{{ TITLE }}"/></dd>
         </dl>
         <dl>
-            <dt><label for="message">{{ lang('MESSAGE') ~ lang('COLON') }}</label><br/><span>{{ lang('MESSAGE_EXPLAIN') }} {{ NEWSLETTER_HTML_PLAIN }}</span>
-            </dt>
+            <dt><label for="message">{{ lang('MESSAGE') ~ lang('COLON') }}</label><br><span>{{ lang('MESSAGE_EXPLAIN') }} {{ NEWSLETTER_HTML_PLAIN }}</span></dt>
             <dd><textarea id="message" name="message" rows="10" cols="60">{{ MESSAGE }}</textarea></dd>
         </dl>
         <dl>
-            <dt><label for="send_test_email">{{ lang('NEWSLETTER_TEST_EMAIL') ~ lang('COLON') }}</label><br/><span>{{ lang('NEWSLETTER_TEST_EMAIL_EXPLAIN') }}</span>
-            </dt>
-            <dd><input class="button2" type="submit" name="send_test_email"
-                       value="{{ lang('NEWSLETTER_SEND_TEST_EMAIL') }}"/></dd>
+            <dt><label for="send_test_email">{{ lang('NEWSLETTER_TEST_EMAIL') ~ lang('COLON') }}</label><br><span>{{ lang('NEWSLETTER_TEST_EMAIL_EXPLAIN') }}</span></dt>
+            <dd><input class="button2" type="submit" name="send_test_email" value="{{ lang('NEWSLETTER_SEND_TEST_EMAIL') }}"/></dd>
         </dl>
         <dl>
             <dt><label for="priority">{{ lang('MAIL_PRIORITY') }}{{ lang('COLON') }}</label></dt>
             <dd><select id="priority" name="mail_priority_flag">{{ S_PRIORITY_OPTIONS }}</select></dd>
         </dl>
         <dl>
-            <dt><label for="url">{{ lang('URL') ~ lang('COLON') }}</label><br/><span>{{ lang('URL_EXPLAIN') }}</span>
+            <dt><label for="url">{{ lang('URL') ~ lang('COLON') }}</label><br><span>{{ lang('URL_EXPLAIN') }}</span>
             </dt>
             <dd><input size="70" name="url" type="url" id="url" value="{{ URL }}"/></dd>
         </dl>
         <dl>
-            <dt><label for="author">{{ lang('AUTHOR') ~ lang('COLON')
-                }}</label><br/><span>{{ lang('AUTHOR_EXPLAIN') }}</span></dt>
+            <dt><label for="author">{{ lang('AUTHOR') ~ lang('COLON') }}</label><br><span>{{ lang('AUTHOR_EXPLAIN') }}</span></dt>
             <dd><input size="40" name="author" type="text" id="author" value="{{ AUTHOR }}"/></dd>
-            <dd>[ <a href="{{ U_FIND_AUTHOR }}" onclick="find_username(this.href); return false;">{{
-                lang('FIND_USERNAME') }}</a> ]
-            </dd>
+            <dd>[ <a href="{{ U_FIND_AUTHOR }}" onclick="find_username(this.href); return false;">{{ lang('FIND_USERNAME') }}</a> ]</dd>
         </dl>
 
         {% EVENT dmzx_newsletter_adm_after %}
@@ -95,8 +86,7 @@
         <legend>{{ lang('NEWSLETTER_VARIABLES') }}</legend>
         {% for var_variables in loops.var_variables %}
         <dl>
-            <dt><label><a onclick="insert_text('{{ var_variables.VAR }}', false)">{{ var_variables.VAR }}</a></label>
-            </dt>
+            <dt><label><a onclick="insert_text('{{ var_variables.VAR }}', false)">{{ var_variables.VAR }}</a></label></dt>
             <dd>{{ var_variables.INFO }}</dd>
         </dl>
         {% endfor %}
