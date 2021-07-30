@@ -1,5 +1,7 @@
 ## Newsletter Changelog
 
+### 1.0.3 - 2021-07-30
+
 ### 1.0.2 - 2020-12-16
 
 - Code update.
