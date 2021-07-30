@@ -7,4 +7,4 @@ services:
             $php_ext: '%core.php_ext%'
             $tables: '%tables%'
     dmzx.newsletter.controller.acp:
-        class: dmzx\newsletter\controller\acp_controller
+        class: 'dmzx\newsletter\controller\acp_controller'
