@@ -77,10 +77,10 @@ class acp_controller
 		user $user,
 		helper $group_helper,
 		manager $ext_manager,
-        $php_ext,
-        $root_path,
-        $adm_relative_path,
-        array $tables
+		$php_ext,
+		$root_path,
+		$adm_relative_path,
+		array $tables
 	)
 	{
 		$this->config = $config;
@@ -257,9 +257,9 @@ class acp_controller
 						}
 
 						$userlist = array_map(function ($entry)
-                        {
-                            return $entry['name'];
-						},  $email_list[$i]);
+						{
+							return $entry['name'];
+						},	$email_list[$i]);
 
 						$this->log->add('admin', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_NEWSLETTER_EMAIL', false, [implode(', ', $userlist)]);
 					}
@@ -287,12 +287,12 @@ class acp_controller
 			WHERE ' . $this->db->sql_in_set('group_name', ['BOTS', 'GUESTS'], true);
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
-        {
+		{
 			$this->template->assign_block_vars('groups', [
 				'ID' => $row['group_id'],
 				'NAME' => $this->group_helper->get_name($row['group_name']),
 			]);
-        }
+		}
 		$this->db->sql_freeresult($result);
 
 		$s_priority_options = '<option value="' . MAIL_LOW_PRIORITY . '">' . $this->language->lang('MAIL_LOW_PRIORITY') . '</option>';
@@ -339,7 +339,7 @@ class acp_controller
 		$result = $this->db->sql_query($sql);
 
 		while ($row = $this->db->sql_fetchrow($result))
-        {
+		{
 			$msg_list[$row['user_id']] = [
 				'name' => $row['username'],
 				'email' => $row['user_email'],
