@@ -80,7 +80,7 @@ class acp_controller
         $php_ext,
         $root_path,
         $adm_relative_path,
-		array $tables
+        array $tables
 	)
 	{
 		$this->config = $config;
@@ -177,7 +177,7 @@ class acp_controller
 									$this->tables['users'] => 'u',
 									$this->tables['user_group'] => 'ug',
 								],
-								'WHERE' => 'ug.group_id = ' . (int)$group_id . '
+								'WHERE' => 'ug.group_id = ' . (int) $group_id . '
 									AND ug.user_pending = 0
 									AND u.user_id = ug.user_id
 									AND u.user_allow_massemail = 1
@@ -211,7 +211,8 @@ class acp_controller
 
 					$i = $j = 0;
 					$email_list = [];
-					do {
+					do
+					{
 						if (($row['user_notify_type'] == NOTIFY_EMAIL && $row['user_email']) ||
 							($row['user_notify_type'] == NOTIFY_IM && $row['user_jabber']) ||
 							($row['user_notify_type'] == NOTIFY_BOTH && ($row['user_email'] || $row['user_jabber'])))
@@ -257,9 +258,8 @@ class acp_controller
 
 						$userlist = array_map(function ($entry)
                         {
-							return $entry['name'];
-
-						}, $email_list[$i]);
+                            return $entry['name'];
+						},  $email_list[$i]);
 
 						$this->log->add('admin', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_NEWSLETTER_EMAIL', false, [implode(', ', $userlist)]);
 					}
@@ -292,7 +292,7 @@ class acp_controller
 				'ID' => $row['group_id'],
 				'NAME' => $this->group_helper->get_name($row['group_name']),
 			]);
-		}
+        }
 		$this->db->sql_freeresult($result);
 
 		$s_priority_options = '<option value="' . MAIL_LOW_PRIORITY . '">' . $this->language->lang('MAIL_LOW_PRIORITY') . '</option>';
@@ -335,10 +335,11 @@ class acp_controller
 	{
 		$sql = 'SELECT *
 			FROM ' . $this->tables['users'] . '
-			WHERE user_id = ' . (int)$member_id;
+			WHERE user_id = ' . (int) $member_id;
 		$result = $this->db->sql_query($sql);
 
-		while ($row = $this->db->sql_fetchrow($result)) {
+		while ($row = $this->db->sql_fetchrow($result))
+        {
 			$msg_list[$row['user_id']] = [
 				'name' => $row['username'],
 				'email' => $row['user_email'],
