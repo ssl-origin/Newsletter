@@ -9,11 +9,13 @@
 
 namespace dmzx\newsletter;
 
-class ext extends \phpbb\extension\base
+use phpbb\extension\base;
+
+class ext extends base
 {
-    public function is_enableable()
-    {
-        $config = $this->container->get('config');
-        return version_compare($config['version'], '3.3.0', '>=');
-    }
+	public function is_enableable()
+	{
+		$config = $this->container->get('config');
+		return version_compare($config['version'], '3.3.0', '>=');
+	}
 }

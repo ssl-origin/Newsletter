@@ -8,11 +8,11 @@
  */
 
 if (!defined('IN_PHPBB')) {
-    exit;
+	exit;
 }
 
 if (empty($lang) || !is_array($lang)) {
-    $lang = [];
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,7 +31,7 @@ if (empty($lang) || !is_array($lang)) {
 // ’ » “ ” …
 
 $lang = array_merge($lang, [
-    'ACP_DMZX_NEWSLETTER_TITLE' => 'Email newsletter',
-    // Log message
-    'LOG_NEWSLETTER_EMAIL' => '<strong>Sent email to user(s)</strong><br />» %s',
+	'ACP_DMZX_NEWSLETTER_TITLE' => 'Email newsletter',
+	// Log message
+	'LOG_NEWSLETTER_EMAIL' => '<strong>Sent email to user(s)</strong><br />» %s',
 ]);

@@ -9,19 +9,21 @@
 
 namespace dmzx\newsletter\migrations;
 
-class newsletter_v101 extends \phpbb\db\migration\migration
-{
-    static public function depends_on()
-    {
-        return [
-            '\dmzx\newsletter\migrations\m1_acp_module',
-        ];
-    }
+use phpbb\db\migration\migration;
 
-    public function update_data()
-    {
-        return [
-            ['config.update', ['newsletter_version', '1.0.1']],
-        ];
-    }
+class newsletter_v101 extends migration
+{
+	static public function depends_on()
+	{
+		return [
+			'\dmzx\newsletter\migrations\m1_acp_module',
+		];
+	}
+
+	public function update_data()
+	{
+		return [
+			['config.update', ['newsletter_version', '1.0.1']],
+		];
+	}
 }

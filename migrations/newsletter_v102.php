@@ -9,19 +9,21 @@
 
 namespace dmzx\newsletter\migrations;
 
-class newsletter_v102 extends \phpbb\db\migration\migration
-{
-    static public function depends_on()
-    {
-        return [
-            '\dmzx\newsletter\migrations\newsletter_v101',
-        ];
-    }
+use phpbb\db\migration\migration;
 
-    public function update_data()
-    {
-        return [
-            ['config.update', ['newsletter_version', '1.0.2']],
-        ];
-    }
+class newsletter_v102 extends migration
+{
+	static public function depends_on()
+	{
+		return [
+			'\dmzx\newsletter\migrations\newsletter_v101',
+		];
+	}
+
+	public function update_data()
+	{
+		return [
+			['config.update', ['newsletter_version', '1.0.2']],
+		];
+	}
 }

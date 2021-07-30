@@ -9,35 +9,38 @@
 
 namespace dmzx\newsletter\acp;
 
+use dmzx\newsletter\controller\acp_controller;
+use phpbb\language\language;
+
 class main_module
 {
-    public $page_title;
-    public $tpl_name;
-    public $u_action;
+	public $page_title;
+	public $tpl_name;
+	public $u_action;
 
-    public function main($id, $mode)
-    {
-        global $phpbb_container, $request;
+	public function main($id, $mode)
+	{
+		global $phpbb_container, $request;
 
-        /** @var \dmzx\newsletter\controller\acp_controller $acp_controller */
-        $acp_controller = $phpbb_container->get('dmzx.newsletter.controller.acp');
+		/** @var acp_controller $acp_controller */
+		$acp_controller = $phpbb_container->get('dmzx.newsletter.controller.acp');
 
-        // Requests
-        $action = $request->variable('action', '');
+		// Requests
+		$action = $request->variable('action', '');
 
-        /** @var \phpbb\language\language $language */
-        $language = $phpbb_container->get('language');
+		/** @var language $language */
+		$language = $phpbb_container->get('language');
 
-        // Load a template from adm/style for our ACP page
-        $this->tpl_name = 'acp_newsletter';
+		// Load a template from adm/style for our ACP page
+		$this->tpl_name = 'acp_newsletter';
 
-        // Set the page title for our ACP page
-        $this->page_title = $language->lang('ACP_DMZX_NEWSLETTER_TITLE');
+		// Set the page title for our ACP page
+		$this->page_title = $language->lang('ACP_DMZX_NEWSLETTER_TITLE');
 
-        // Make the $u_action url available in our ACP controller
-        $acp_controller->set_page_url($this->u_action);
+		// Make the $u_action url available in our ACP controller
+		$acp_controller->set_page_url($this->u_action);
 
-        // Load the display options handle in our ACP controller
-        $acp_controller->display_options();
-    }
+		// Load the display options handle in our ACP controller
+		$acp_controller->display_options();
+	}
 }

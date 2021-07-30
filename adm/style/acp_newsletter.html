@@ -2,95 +2,95 @@
 
 {% if S_NEWSLETTER_ENABLE %}
 <script>
-    var form_name = 'acp_newsletter';
-    var text_name = 'message';
+	var form_name = 'acp_newsletter';
+	var text_name = 'message';
 </script>
 
 <h1>{{ lang('ACP_DMZX_NEWSLETTER_TITLE') }}</h1>
 <p>{{ lang('NEWSLETTER_DESC') }}</p>
 
 <p>
-    <img src="https://img.shields.io/badge/{{ lang('NEWSLETTER_VERSION') }}-{{ NEWSLETTER_VERSION }}-green.svg?style=plastic"/>
+	<img src="https://img.shields.io/badge/{{ lang('NEWSLETTER_VERSION') }}-{{ NEWSLETTER_VERSION }}-green.svg?style=plastic"/>
 </p>
 
 {% if PREVIEW %}
 <fieldset>
-    <legend>{{ lang('PREVIEW') }}</legend>
-    <p>{{ PREVIEW }}</p>
+	<legend>{{ lang('PREVIEW') }}</legend>
+	<p>{{ PREVIEW }}</p>
 </fieldset>
 {% endif %}
 
 {% if S_WARNING %}
 <div class="errorbox">
-    <h3>{{ WARNING }}</h3>
-    <p>{{ WARNING_MSG }}</p>
+	<h3>{{ WARNING }}</h3>
+	<p>{{ WARNING_MSG }}</p>
 </div>
 {% endif %}
 
 <form id="acp_newsletter" method="post" action="{{ U_ACTION }}">
-    <fieldset>
-        <legend>{{ lang('COMPOSE') }}</legend>
-        <dl>
-            <dt><label for="group">{{ lang('SEND_TO_GROUP') ~ lang('COLON') }}</label></dt>
-            <dd>
-                <select id="group" name="g">
-                    <option value="0">{{ lang('ALL_USERS') }}</option>
-                    {% for group in groups %}
-                    <option value="{{ group.ID }}">{{ group.NAME }}</option>
-                    {% endfor %}
-                </select>
-            </dd>
-        </dl>
-        <dl>
-            <dt><label for="usernames">{{ lang('SEND_TO_USERS') ~ lang('COLON') }}</label><br><span>{{ lang('SEND_TO_USERS_EXPLAIN') }}</span></dt>
-            <dd><textarea name="usernames" id="usernames" rows="5" cols="40">{{ USERNAMES }}</textarea></dd>
-            <dd>[ <a href="{{ U_FIND_USERNAME }}" onclick="find_username(this.href); return false;">{{ lang('FIND_USERNAME') }}</a> ]</dd>
-        </dl>
-        <dl>
-            <dt><label for="title">{{ lang('TITLE') ~ lang('COLON') }}</label></dt>
-            <dd><input size="40" name="title" type="text" id="title" value="{{ TITLE }}"/></dd>
-        </dl>
-        <dl>
-            <dt><label for="message">{{ lang('MESSAGE') ~ lang('COLON') }}</label><br><span>{{ lang('MESSAGE_EXPLAIN') }} {{ NEWSLETTER_HTML_PLAIN }}</span></dt>
-            <dd><textarea id="message" name="message" rows="10" cols="60">{{ MESSAGE }}</textarea></dd>
-        </dl>
-        <dl>
-            <dt><label for="send_test_email">{{ lang('NEWSLETTER_TEST_EMAIL') ~ lang('COLON') }}</label><br><span>{{ lang('NEWSLETTER_TEST_EMAIL_EXPLAIN') }}</span></dt>
-            <dd><input class="button2" type="submit" name="send_test_email" value="{{ lang('NEWSLETTER_SEND_TEST_EMAIL') }}"/></dd>
-        </dl>
-        <dl>
-            <dt><label for="priority">{{ lang('MAIL_PRIORITY') }}{{ lang('COLON') }}</label></dt>
-            <dd><select id="priority" name="mail_priority_flag">{{ S_PRIORITY_OPTIONS }}</select></dd>
-        </dl>
-        <dl>
-            <dt><label for="url">{{ lang('URL') ~ lang('COLON') }}</label><br><span>{{ lang('URL_EXPLAIN') }}</span>
-            </dt>
-            <dd><input size="70" name="url" type="url" id="url" value="{{ URL }}"/></dd>
-        </dl>
-        <dl>
-            <dt><label for="author">{{ lang('AUTHOR') ~ lang('COLON') }}</label><br><span>{{ lang('AUTHOR_EXPLAIN') }}</span></dt>
-            <dd><input size="40" name="author" type="text" id="author" value="{{ AUTHOR }}"/></dd>
-            <dd>[ <a href="{{ U_FIND_AUTHOR }}" onclick="find_username(this.href); return false;">{{ lang('FIND_USERNAME') }}</a> ]</dd>
-        </dl>
+	<fieldset>
+		<legend>{{ lang('COMPOSE') }}</legend>
+		<dl>
+			<dt><label for="group">{{ lang('SEND_TO_GROUP') ~ lang('COLON') }}</label></dt>
+			<dd>
+				<select id="group" name="g">
+					<option value="0">{{ lang('ALL_USERS') }}</option>
+					{% for group in groups %}
+					<option value="{{ group.ID }}">{{ group.NAME }}</option>
+					{% endfor %}
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="usernames">{{ lang('SEND_TO_USERS') ~ lang('COLON') }}</label><br><span>{{ lang('SEND_TO_USERS_EXPLAIN') }}</span></dt>
+			<dd><textarea name="usernames" id="usernames" rows="5" cols="40">{{ USERNAMES }}</textarea></dd>
+			<dd>[ <a href="{{ U_FIND_USERNAME }}" onclick="find_username(this.href); return false;">{{ lang('FIND_USERNAME') }}</a> ]</dd>
+		</dl>
+		<dl>
+			<dt><label for="title">{{ lang('TITLE') ~ lang('COLON') }}</label></dt>
+			<dd><input size="40" name="title" type="text" id="title" value="{{ TITLE }}"/></dd>
+		</dl>
+		<dl>
+			<dt><label for="message">{{ lang('MESSAGE') ~ lang('COLON') }}</label><br><span>{{ lang('MESSAGE_EXPLAIN') }} {{ NEWSLETTER_HTML_PLAIN }}</span></dt>
+			<dd><textarea id="message" name="message" rows="10" cols="60">{{ MESSAGE }}</textarea></dd>
+		</dl>
+		<dl>
+			<dt><label for="send_test_email">{{ lang('NEWSLETTER_TEST_EMAIL') ~ lang('COLON') }}</label><br><span>{{ lang('NEWSLETTER_TEST_EMAIL_EXPLAIN') }}</span></dt>
+			<dd><input class="button2" type="submit" name="send_test_email" value="{{ lang('NEWSLETTER_SEND_TEST_EMAIL') }}"/></dd>
+		</dl>
+		<dl>
+			<dt><label for="priority">{{ lang('MAIL_PRIORITY') }}{{ lang('COLON') }}</label></dt>
+			<dd><select id="priority" name="mail_priority_flag">{{ S_PRIORITY_OPTIONS }}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="url">{{ lang('URL') ~ lang('COLON') }}</label><br><span>{{ lang('URL_EXPLAIN') }}</span>
+			</dt>
+			<dd><input size="70" name="url" type="url" id="url" value="{{ URL }}"/></dd>
+		</dl>
+		<dl>
+			<dt><label for="author">{{ lang('AUTHOR') ~ lang('COLON') }}</label><br><span>{{ lang('AUTHOR_EXPLAIN') }}</span></dt>
+			<dd><input size="40" name="author" type="text" id="author" value="{{ AUTHOR }}"/></dd>
+			<dd>[ <a href="{{ U_FIND_AUTHOR }}" onclick="find_username(this.href); return false;">{{ lang('FIND_USERNAME') }}</a> ]</dd>
+		</dl>
 
-        {% EVENT dmzx_newsletter_adm_after %}
+		{% EVENT dmzx_newsletter_adm_after %}
 
-        <p class="submit-buttons">
-            <input class="button2" type="submit" name="preview" value="{{ lang('PREVIEW') }}"/>&nbsp;
-            <input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SEND_NEWSLETTER') }}"/>&nbsp;
-            <input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}"/>
-            {{ S_FORM_TOKEN }}
-        </p>
-    </fieldset>
-    <fieldset>
-        <legend>{{ lang('NEWSLETTER_VARIABLES') }}</legend>
-        {% for var_variables in loops.var_variables %}
-        <dl>
-            <dt><label><a onclick="insert_text('{{ var_variables.VAR }}', false)">{{ var_variables.VAR }}</a></label></dt>
-            <dd>{{ var_variables.INFO }}</dd>
-        </dl>
-        {% endfor %}
-    </fieldset>
+		<p class="submit-buttons">
+			<input class="button2" type="submit" name="preview" value="{{ lang('PREVIEW') }}"/>&nbsp;
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SEND_NEWSLETTER') }}"/>&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}"/>
+			{{ S_FORM_TOKEN }}
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('NEWSLETTER_VARIABLES') }}</legend>
+		{% for var_variables in loops.var_variables %}
+		<dl>
+			<dt><label><a onclick="insert_text('{{ var_variables.VAR }}', false)">{{ var_variables.VAR }}</a></label></dt>
+			<dd>{{ var_variables.INFO }}</dd>
+		</dl>
+		{% endfor %}
+	</fieldset>
 </form>
 {% else %}
 <div class="successbox notice">{{ NO_NEWSLETTER_EMAIL_ENABLE }}</div>
