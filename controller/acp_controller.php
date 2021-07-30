@@ -231,8 +231,6 @@ class acp_controller
 
 					for ($i = 0, $size = count($email_list); $i < $size; $i++)
 					{
-						$used_lang = $email_list[$i][0]['lang'];
-						$used_method = $email_list[$i][0]['method'];
 						$email_count = $email_list[$i];
 
 						$trigger_message = $this->language->lang('NEWSLETTER_SEND', count($email_count));
@@ -333,21 +331,18 @@ class acp_controller
 
 	public function email_member($member_id, $message, $title, $author, $url, $priority)
 	{
-		$sql = 'SELECT *
-			FROM ' . $this->tables['users'] . '
-			WHERE user_id = ' . (int) $member_id;
+		$sql = 'SELECT user_id, username, user_email, user_lang, user_ip
+			FROM '. $this->tables['users'] .'
+			WHERE '. $this->db->sql_in_set('user_id', $member_id);
 		$result = $this->db->sql_query($sql);
+
+		$users = [];
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$msg_list[$row['user_id']] = [
-				'name' => $row['username'],
-				'email' => $row['user_email'],
-				'lang' => $row['user_lang'],
-				'user_ip' => $row['user_ip'],
-				'time' => time()
-			];
+			$users[] = $row;
 		}
+
 		$this->db->sql_freeresult($result);
 
 		if (!class_exists('messenger'))
@@ -355,31 +350,36 @@ class acp_controller
 			include($this->root_path . 'includes/functions_messenger.' . $this->php_ext);
 		}
 
-		$messenger = new messenger(false);
+		$messenger = new \messenger(false);
 
-		foreach ($msg_list as $key => $value)
+		$xhead_username = ($this->config['board_contact_name']) ? $this->config['board_contact_name'] : $this->user->lang('ADMINISTRATOR');
+
+		// mail headers
+		$messenger->headers('X-AntiAbuse: Board servername - ' . $this->config['server_name']);
+		$messenger->headers('X-AntiAbuse: Username - ' . $xhead_username);
+		$messenger->headers('X-AntiAbuse: User_id - ' . $this->user->data['user_id']);
+
+		// mail content...
+		$messenger->from($this->config['board_contact']);
+
+		foreach ($users as $user)
 		{
 			$var_replace = $this->template_vars();
-			$str_replace = [$this->config['sitename'], generate_board_url(), $value['name'], $value['email'], $url, $author];
+			$str_replace = [$this->config['sitename'], generate_board_url(), $user['username'], $user['user_email'], $url, $author];
 			$message = str_replace($var_replace, $str_replace, $message);
 
 			$use_html = ($this->ext_manager->is_enabled('dmzx/htmlemail')) ? true : false;
 			($use_html) ? $messenger->set_mail_html(true) : null;
 
 			$templ = 'newsletter.' . (($use_html) ? 'html' : 'txt');
-			$messenger->template('@dmzx_newsletter/' . $templ, $value['lang']);
-			$messenger->to($value['email'], $value['name']);
+			$messenger->template('@dmzx_newsletter/' . $templ, $user['user_lang']);
+			$messenger->to($user['user_email'], $user['username']);
 			$messenger->set_mail_priority($priority);
-			$messenger->headers('X-AntiAbuse: Board servername - ' . $this->config['server_name']);
-			$messenger->headers('X-AntiAbuse: User_id - ' . $key);
-			$messenger->headers('X-AntiAbuse: Username - ' . $value['name']);
-			$messenger->headers('X-AntiAbuse: User IP - ' . $value['user_ip']);
 			$messenger->assign_vars([
 				'MESSAGE' => htmlspecialchars_decode($message),
 				'SUBJECT' => $title,
 			]);
-			$messenger->send(NOTIFY_EMAIL);
-			$messenger->save_queue();
+			$messenger->send();
 		}
 	}
 
