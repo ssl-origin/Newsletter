@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "This adds newsletter option in ACP.",
 	"homepage": "https://www.dmzx-web.net",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"time": "2020-12-16",
 	"keywords": [
 	"phpbb",

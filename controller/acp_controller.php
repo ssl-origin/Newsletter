@@ -331,7 +331,7 @@ class acp_controller
 
 	public function email_member($member_id, $message, $title, $author, $url, $priority)
 	{
-        $emails_sent = 0;
+		$emails_sent = 0;
 
 		$sql = 'SELECT user_id, username, user_email, user_lang, user_ip
 			FROM '. $this->tables['users'] .'
@@ -381,15 +381,15 @@ class acp_controller
 				'MESSAGE' => htmlspecialchars_decode($message),
 				'SUBJECT' => $title,
 			]);
-            $mail_sent = $messenger->send(NOTIFY_EMAIL, false);
+			$mail_sent = $messenger->send(NOTIFY_EMAIL, false);
 
-            if ($mail_sent)
-            {
-                $emails_sent++;
-            }
-            $messenger->reset();
+			if ($mail_sent)
+			{
+				$emails_sent++;
+			}
+			$messenger->reset();
 		}
-        $messenger->save_queue();
+		$messenger->save_queue();
 	}
 
 	public function template_vars()

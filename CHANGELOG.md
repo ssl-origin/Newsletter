@@ -1,6 +1,8 @@
 ## Newsletter Changelog
 
 ### 1.0.3 - 2021-07-30
+- Changed code messenger.
+- Code update
 
 ### 1.0.2 - 2020-12-16
 
