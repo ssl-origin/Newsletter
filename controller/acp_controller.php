@@ -9,7 +9,6 @@
 
 namespace dmzx\newsletter\controller;
 
-use messenger;
 use phpbb\config\config;
 use phpbb\db\driver\driver_interface;
 use phpbb\extension\manager;
