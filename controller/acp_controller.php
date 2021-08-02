@@ -331,6 +331,8 @@ class acp_controller
 
 	public function email_member($member_id, $message, $title, $author, $url, $priority)
 	{
+        $emails_sent = 0;
+
 		$sql = 'SELECT user_id, username, user_email, user_lang, user_ip
 			FROM '. $this->tables['users'] .'
 			WHERE '. $this->db->sql_in_set('user_id', $member_id);
@@ -350,7 +352,7 @@ class acp_controller
 			include($this->root_path . 'includes/functions_messenger.' . $this->php_ext);
 		}
 
-		$messenger = new \messenger(false);
+		$messenger = new \messenger();
 
 		$xhead_username = ($this->config['board_contact_name']) ? $this->config['board_contact_name'] : $this->user->lang('ADMINISTRATOR');
 
@@ -379,8 +381,15 @@ class acp_controller
 				'MESSAGE' => htmlspecialchars_decode($message),
 				'SUBJECT' => $title,
 			]);
-			$messenger->send();
+            $mail_sent = $messenger->send(NOTIFY_EMAIL, false);
+
+            if ($mail_sent)
+            {
+                $emails_sent++;
+            }
+            $messenger->reset();
 		}
+        $messenger->save_queue();
 	}
 
 	public function template_vars()
